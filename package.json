@@ -1,0 +1,41 @@
+{
+  "name": "@tmigone/admin-components",
+  "version": "1.0.0",
+  "private": false,
+  "main": "dist/admin-components.common.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:bundle": "vue-cli-service build --target lib --name admin-components ./src/index.js",
+    "lint": "vue-cli-service lint",
+    "deploy": "npm publish --access public"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0-rc.1",
+    "core-js": "^2.6.5",
+    "lodash.clonedeep": "^4.5.0",
+    "vue-fragment": "^1.5.1",
+    "vue": "^2.6.10"
+  },
+  "peerDependencies": {
+    "vuetify": "^1.5.5"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-cli-plugin-vuetify": "^0.5.0",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ]
+}
