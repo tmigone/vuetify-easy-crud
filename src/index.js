@@ -20,7 +20,6 @@ export function install (Vue) {
 
   // Mixins
   Vue.mixin(CrudFormMixin)
-  console.log('hohoho')
 }
 
 // Create module definition for Vue.use()
