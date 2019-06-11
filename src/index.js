@@ -15,8 +15,8 @@ export function install (Vue) {
   Vue.use(Fragment.Plugin)
 
   // Components
-  Vue.component('crud-table', CrudTable)
-  Vue.component('crud-fragment', CrudFragment)
+  Vue.component('vec-table', CrudTable)
+  Vue.component('vec-fragment', CrudFragment)
 
   // Mixins
   Vue.mixin(CrudFormMixin)
@@ -37,4 +37,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default { plugin, CrudTable, CrudFragment, CrudFormMixin }
+export default { plugin, 'vec-table': CrudTable, 'vec-fragment': CrudFragment, 'vec-form-mixin': CrudFormMixin }
