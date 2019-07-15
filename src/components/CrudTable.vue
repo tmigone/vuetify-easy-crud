@@ -83,14 +83,14 @@ export default {
       let _headers = [ ...this.headers, {
         text: 'Acciones',
         value: 'actions',
-        align: 'left',
+        align: 'center',
         sortable: false
       } ]
       return _headers.map(h => {
         return {
           text: h.text || h,
           value: h.value || h.text || h || '',
-          align: h.align || 'left',
+          align: h.align || 'center',
           sortable: h.sortable || false
         }
       })
