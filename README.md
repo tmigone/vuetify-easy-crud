@@ -36,6 +36,29 @@ import VuetifyEasyCrud from '@tmigone/vuetify-easy-crud'
 Vue.use(VuetifyEasyCrud)
 ```
 
+Alternatively, you can create a plugin file `plugins/vec-table.js`:
+
+```javascript
+import Vue from 'vue'
+import VuetifyEasyCrud from '@tmigone/vuetify-easy-crud'
+
+Vue.use(VuetifyEasyCrud)
+```
+
+and include it on your `main.js` file after `vuetify`:
+```javascript
+import Vue from 'vue'
+import './plugins/vuetify'
+import './plugins/admin'
+
+...
+
+new Vue({
+  render: function (h) { return h(App) }
+}).$mount('#app')
+
+```
+
 # Components
 
 ## Vuetify CRUD Table (vec-table)
@@ -111,7 +134,7 @@ Each CRUD operation performed on the data fires an event. This component does no
 | `delete-item` | Emitted when an item is deleted. Receives ```item``` object. |
 
 ## Vuetify Easy CRUD Fragment (vec-fragment)
-The `vec-fragment` is an auxiliary component used to customize the ```list-view``` slot component. The ```list-view``` component needs to return multiple `<td>` elements at the root level. This functionality is currently planned to be implemented on [Vue 3.0](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf). Until then, this component uses a custom solution. 
+The `vec-fragment` is an auxiliary component used to customize the ```list-view``` slot component. The ```list-view``` component needs to return multiple `<td>` elements at the root level. This functionality is currently planned to be implemented on [Vue 3.0](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf). Until then, this component uses [vue-fragments](https://www.npmjs.com/package/vue-fragments) to achieve the same result.
 
 ### Usage
 ```html
