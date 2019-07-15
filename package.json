@@ -11,16 +11,14 @@
     "deploy": "npm publish --access public"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0-rc.1",
-    "core-js": "^2.6.5",
     "lodash.clonedeep": "^4.5.0",
-    "vue-fragment": "^1.5.1",
-    "vue": "^2.6.10"
+    "vue-fragment": "^1.5.1"
   },
   "peerDependencies": {
     "vuetify": "^1.5.5"
   },
   "devDependencies": {
+    "vue": "^2.6.10",
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-eslint": "^3.7.0",
     "@vue/cli-service": "^3.7.0",
@@ -33,9 +31,6 @@
   },
   "files": [
     "dist/*",
-    "src/*",
-    "public/*",
-    "*.json",
-    "*.js"
+    "*.json"
   ]
 }

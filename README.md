@@ -3,7 +3,7 @@
 Vuertify Easy Crud extends [vuetify's](https://vuetifyjs.com) v-data-table component to provide easier handling of CRUD operations with less boilerplate code.
 
 
-## Requirements
+# Requirements
 
 Vuetify is included as a peer dependency. This means that:
 - You must install it yourself. 
@@ -18,21 +18,20 @@ If you are using Vuetify's a la carte system you need to import the following co
 - VDialog, VTextField, VBtn, VIcon
 - VSpacer
 
-## Installation
-
+# Installation
+Install it with NPM by running: 
 ```bash
 npm install --save @tmigone/vuetify-easy-crud
 ```
 
-## Setup
+# Setup
 In your ```main.js``` file include the following lines: 
 
 ```javascript
 import VuetifyEasyCrud from '@tmigone/vuetify-easy-crud'
 
-Vue.use(VuetifyEasyCrud.plugin)
+Vue.use(VuetifyEasyCrud)
 ```
 
-## Usage
+# Components
 
-## Options

@@ -90,7 +90,7 @@ export default {
         return {
           text: h.text || h,
           value: h.value || h.text || h || '',
-          align: h.align || 'center',
+          align: h.align || 'left',
           sortable: h.sortable || false
         }
       })
@@ -189,6 +189,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
