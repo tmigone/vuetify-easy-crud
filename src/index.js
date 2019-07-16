@@ -17,10 +17,16 @@ const VuetifyEasyCrud = {
     Vue.component('vec-fragment', CrudFragment)
 
     // Mixins
-    if (options.globalMixins) {
+    if (options && options.globalMixins) {
       Vue.mixin(CrudFormMixin)
     }
   }
+}
+
+export {
+  CrudTable as VecTable,
+  CrudFragment as VecFragment,
+  CrudFormMixin as VecFormMixin
 }
 
 export default VuetifyEasyCrud

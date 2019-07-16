@@ -28,42 +28,35 @@ npm install --save @tmigone/vuetify-easy-crud
 ```
 
 # Setup
+
+## Global installation
 In your `main.js` file include the following lines: 
 
 ```javascript
 import VuetifyEasyCrud from '@tmigone/vuetify-easy-crud'
 
-Vue.use(VuetifyEasyCrud)
+const options = {
+  globalMixins: false
+}
+
+Vue.use(VuetifyEasyCrud, options)
 ```
 
-Alternatively, you can create a plugin file `plugins/vec-table.js`:
+This will register `vec-table` and `vec-fragment` globaly. If `globalMixins` is set (the default is false) to true then `vec-form-mixin` will also be globally registered (but you probably shouldnt do this).
+
+
+## Single component
+You can also import each component locally with:
 
 ```javascript
-import Vue from 'vue'
-import VuetifyEasyCrud from '@tmigone/vuetify-easy-crud'
-
-Vue.use(VuetifyEasyCrud)
+import { VecTable, VecFragment, VecFormMixin } from '@tmigone/vuetify-easy-crud'
 ```
 
-and include it on your `main.js` file after `vuetify`:
-```javascript
-import Vue from 'vue'
-import './plugins/vuetify'
-import './plugins/admin'
-
-...
-
-new Vue({
-  render: function (h) { return h(App) }
-}).$mount('#app')
-
-```
 
 # Components
 
 ## Vuetify CRUD Table (vec-table)
 The `vec-table` component is a regular tabular data table with easy CRUD capabilities.
-
 
 ### Usage
 ```html
@@ -123,6 +116,8 @@ You can customize creation, read and update operations via slots. All of the slo
 | `update-form` | Slot to customize the item update form. Receives ```props.item``` with the given item object. |
 | `create-form` | Slot to customize the item creation form. |
 
+When building your custom `create-form` or `update-form` you will also need to extend your component with `vec-form-mixin`. See the mixin section below to learn how to integrate with it.
+
 ### Events
 
 Each CRUD operation performed on the data fires an event. This component does not alter the data it's given. It's up to the user to decide what to do with it:
@@ -153,3 +148,21 @@ export default {
 }
 </script>
 ```
+
+# Mixins
+
+## Vuetify Form Mixin (vec-form-mixin)
+`vec-form-mixin` is a mixin that simplifies the creation of `vec-table` forms.
+The mixin provides the following functionality:
+
+- `item` property, to receive the given object. Read only.
+- `editableItem` component data. This is what your form should modify.
+- `exit` method. Closes the form without saving.
+- `createAndExit` method. Closes the form after saving a new item (based of `editableItem`).
+- `updateAndExit` method. Closes the form after updating an existing item (based of `editableItem`).
+
+
+# Example
+
+For a complete working example check out [vuetify-easy-crud-example](https://github.com/tomasmigone/vuetify-easy-crud-example).
+
