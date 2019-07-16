@@ -17,8 +17,9 @@ const VuetifyEasyCrud = {
     Vue.component('vec-fragment', CrudFragment)
 
     // Mixins
-    Vue.mixin(CrudFormMixin)
-    console.log('Plugin installed')
+    if (options.globalMixins) {
+      Vue.mixin(CrudFormMixin)
+    }
   }
 }
 

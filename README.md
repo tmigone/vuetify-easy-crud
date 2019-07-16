@@ -107,7 +107,7 @@ Headers can be provided in two formats:
 ```
 {
   align: "left/center/right",
-  sortable: true/false,
+  sortable: true/false,         // Requires value to be set
   text: "column name",
   value: "value to sort by"
 }
