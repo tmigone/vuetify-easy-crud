@@ -13,7 +13,7 @@ The following packages are included as peer dependencies:
 
 This means that you must install them yourself. NPM will warn you if they are not present in your project.
 
-## Vuetify
+### Vuetify
 For instructions on how to install Vuetify please visit [this quick start guide](https://vuetifyjs.com/en/getting-started/quick-start).
 
 If you are using Vuetify's a la carte system you need to import the following components:
@@ -30,7 +30,8 @@ npm install --save @tmigone/vuetify-easy-crud
 
 # Setup
 
-## Global installation
+
+### Global installation
 In your `main.js` file include the following lines: 
 
 ```javascript
@@ -46,7 +47,7 @@ Vue.use(VuetifyEasyCrud, options)
 This will register all components globaly. If `globalMixins` is set (the default is false) to true then mixins will also be globally registered (but you probably shouldnt do this).
 
 
-## Single component
+### Single component
 You can also pick and import specific components locally doing:
 
 ```javascript
