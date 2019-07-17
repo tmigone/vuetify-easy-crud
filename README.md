@@ -56,7 +56,7 @@ import { VecTable, VecFragment, VecFormMixin } from '@tmigone/vuetify-easy-crud'
 
 # Components
 
-## Vuetify CRUD Table (vec-table)
+## Vuetify Easy CRUD Table (vec-table)
 The `vec-table` component is a regular tabular data table with easy CRUD capabilities.
 
 ### Usage
@@ -150,6 +150,50 @@ export default {
 }
 </script>
 ```
+
+## "Vuetify Easy CRUD Table" Easy Vuex (vex-table)
+
+`vex-table` component extends the functionality from `vec-table` by adding integration with Vuex store.
+The component uses a getter to obtain initial data and dispatches add/update/delete actions for CRUD operations.
+Vuex setup and implementation need to be implemented separately.
+
+### Usage
+```html
+    <vex-table
+      module="moduleName"
+      title="Table title"
+      :headers="['firstname', 'lastname']"
+    >
+      <template v-slot:list-view="props">
+        <list-view :item="props.item"></list-view>
+      </template>
+      <template v-slot:create-form="props">
+        <create-form></create-form>
+      </template>
+      <template v-slot:update-form="props">
+        <update-form :item="props.item"></update-form>
+      </template>
+    </vex-table>
+```
+
+### Properties
+```vex-table``` accepts the following properties: 
+
+| Prop | Description |
+| --- | --- |
+| `module` | (required) Vuex module name. |
+| `title` | (optional) Display name for the table. |
+| `headers` | (optional) Array of objects representing the table headers. Shared options with `vec-table`. |
+| `get` | (optional) Name of the getter to obtain initial data. Default: `<module>/get` |
+| `add` | (optional) Name of the action to add an item. Default: `<module>/add` |
+| `update` | (optional) Name of the action to update an item. Default: `<module>/update` |
+| `delete` | (optional) Name of the action to delete an item. Default: `<module>/delete` |
+
+### Slots
+See `vec-table`slots.
+
+### Events
+This component uses no events.
 
 # Mixins
 
