@@ -2,7 +2,10 @@
 
 Vuertify Easy Crud extends [vuetify's](https://vuetifyjs.com) `v-data-table` component to provide easier handling of CRUD operations with less boilerplate code.
 
-If you are using firebase as your database solution check out @tmigone/vec-easy-firebase package.
+What component to use?
+- just vuetify: `vec-table`
+- vuetify + vuex: `vex-table`
+- vuetify + vuex + firebase: `vef-table` (Not implemented yet)
 
 
 # Requirements
