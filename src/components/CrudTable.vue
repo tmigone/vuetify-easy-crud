@@ -24,13 +24,23 @@
         @action="event => event.action.callback(event.item)"
       >
         <template v-slot:row="props">
-          <slot name="list-view" :item="props.item"></slot>
+          <slot name="list-view" :item="props.item">
+            <td v-for="(value, index) in Object.values(props.item)" :key="index">{{ value }}</td>
+          </slot>
         </template>
       </crud-list>
     </v-card-text>
 
     <!-- DIALOG: ITEM DETAIL -->
-    <v-dialog v-model="dialog.show" max-width="1200px" persistent>
+    <v-dialog
+      v-model="dialog.show"
+      max-width="1200px"
+      persistent
+      @crud-form-exit="exit"
+      @crud-form-create-and-exit="createAndExit"
+      @crud-form-update-and-exit="updateAndExit"
+      @crud-form-delete-and-exit="deleteAndExit"
+    >
       <slot v-if="dialog.type === 'create'" name="create-form"></slot>
       <slot v-if="dialog.type === 'update'" name="update-form" :item="selectedItem"></slot>
       <slot v-if="dialog.type === 'delete'" name="delete-form" :item="selectedItem">
@@ -46,7 +56,6 @@ import CrudTitle from '@/components/crud-table/Title.vue'
 import Search from '@/components/crud-table/Search.vue'
 import List from '@/components/crud-table/List.vue'
 import Action from '@/components/crud-table/Action.vue'
-import { EventBus } from '@/EventBus.js'
 
 export default {
   name: 'crud-table',
@@ -59,7 +68,7 @@ export default {
   },
   props: {
     title: { type: String, required: false, default: '' },
-    headers: { type: Array, required: true, default: () => [] },
+    headers: { type: Array, required: false, default: () => [] },
     items: { type: Array, required: true, default: () => [] },
     groupActions: { type: Array, required: false, default: () => [] },
     listActions: { type: Array, required: false, default: () => [] },
@@ -80,7 +89,9 @@ export default {
   },
   computed: {
     _headers: function () {
-      let _headers = [ ...this.headers, {
+      // Headers priority: provided headers > first item keys
+      let headers = this.headers.length > 0 ? this.headers : (this.items.length > 0 ? Object.keys(this.items[ 0 ]) : [])
+      let _headers = [ ...headers, {
         text: 'Acciones',
         value: 'actions',
         align: 'center',
@@ -156,18 +167,6 @@ export default {
       }
       return actions
     }
-  },
-  created () {
-    EventBus.$on('crud-form-exit', this.exit)
-    EventBus.$on('crud-form-create-and-exit', this.createAndExit)
-    EventBus.$on('crud-form-update-and-exit', this.updateAndExit)
-    EventBus.$on('crud-form-delete-and-exit', this.deleteAndExit)
-  },
-  beforeDestroy () {
-    EventBus.$off('crud-form-exit', this.exit)
-    EventBus.$off('crud-form-create-and-exit', this.createAndExit)
-    EventBus.$off('crud-form-update-and-exit', this.updateAndExit)
-    EventBus.$off('crud-form-delete-and-exit', this.deleteAndExit)
   },
   methods: {
     createAndExit (item) {

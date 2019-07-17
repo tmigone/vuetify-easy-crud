@@ -5,7 +5,7 @@
   "main": "dist/vuetify-easy-crud.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build:bundle": "vue-cli-service build --target lib --name vuetify-easy-crud ./src/index.js",
+    "build": "vue-cli-service build --target lib --name vuetify-easy-crud ./src/index.js",
     "lint": "vue-cli-service lint",
     "deploy": "npm publish --access public"
   },

@@ -1,4 +1,3 @@
-import { EventBus } from '@/EventBus.js'
 import deepClone from 'lodash.clonedeep'
 
 export default {
@@ -17,19 +16,19 @@ export default {
   },
   methods: {
     createAndExit () {
-      EventBus.$emit('crud-form-create-and-exit', deepClone(this.editableItem))
+      this.$parent.$parent.$emit('crud-form-create-and-exit', deepClone(this.editableItem))
       this.clean()
     },
     updateAndExit () {
-      EventBus.$emit('crud-form-update-and-exit', deepClone(this.editableItem))
+      this.$parent.$parent.$emit('crud-form-update-and-exit', deepClone(this.editableItem))
       this.clean()
     },
     deleteAndExit () {
-      EventBus.$emit('crud-form-delete-and-exit', deepClone(this.editableItem))
+      this.$parent.$parent.$emit('crud-form-delete-and-exit', deepClone(this.editableItem))
       this.clean()
     },
     exit () {
-      EventBus.$emit('crud-form-exit')
+      this.$parent.$parent.$emit('crud-form-exit')
       this.clean()
     },
     clean () {
