@@ -30,8 +30,8 @@ npm install --save @tmigone/vuetify-easy-crud
 
 # Setup
 
+### Global installation
 
-### Global installation
 In your `main.js` file include the following lines: 
 
 ```javascript
@@ -196,7 +196,7 @@ See `vec-table`slots.
 ### Events
 This component uses no events.
 
-# Mixins
+# Mixins
 
 ## Vuetify Form Mixin (vec-form-mixin)
 `vec-form-mixin` is a mixin that simplifies the creation of `vec-table` forms.
