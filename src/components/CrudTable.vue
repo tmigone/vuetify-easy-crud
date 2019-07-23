@@ -24,9 +24,7 @@
         @action="event => event.action.callback(event.item)"
       >
         <template v-slot:row="props">
-          <slot name="list-view" :item="props.item">
-            <td v-for="(value, index) in Object.values(props.item)" :key="index">{{ mostLikelyValue(index, props.item) }}</td>
-          </slot>
+          <slot name="list-view" :item="props.item"></slot>
         </template>
       </crud-list>
     </v-card-text>
@@ -184,15 +182,6 @@ export default {
     exit () {
       this.dialog.show = false
       this.dialog.type = ''
-    },
-    mostLikelyValue (index, item) {
-      let key = this._headers[index]
-
-      if (key.value) {
-        return item[key.value]
-      } else {
-        console.log('Warning: Could not find specified key.')
-      }
     }
   }
 }
