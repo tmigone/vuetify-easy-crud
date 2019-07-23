@@ -4,6 +4,7 @@ import Fragment from 'vue-fragment'
 // Import vue components
 import CrudTable from '@/components/CrudTable.vue'
 import VuexTable from '@/components/VuexTable.vue'
+import FirestoreTable from '@/components/FirestoreTable.vue'
 import CrudFragment from '@/components/CrudFragment.vue'
 import CrudFormMixin from '@/mixins/CrudForm.js'
 
@@ -16,6 +17,7 @@ const VuetifyEasyCrud = {
     // Components
     Vue.component('vec-table', CrudTable)
     Vue.component('vex-table', VuexTable)
+    Vue.component('vef-table', FirestoreTable)
     Vue.component('vec-fragment', CrudFragment)
 
     // Mixins
@@ -28,6 +30,7 @@ const VuetifyEasyCrud = {
 export {
   CrudTable as VecTable,
   VuexTable as VexTable,
+  FirestoreTable as VefTable,
   CrudFragment as VecFragment,
   CrudFormMixin as VecFormMixin
 }
