@@ -1,5 +1,5 @@
 <template>
-  <vec-table
+  <crud-table
     :title="title"
     :items="items"
     :headers="headers"
@@ -16,7 +16,7 @@
     <template v-slot:update-form="props">
       <slot name="update-form" :item="props.item"></slot>
     </template>
-  </vec-table>
+  </crud-table>
 </template>
 
 <script>
@@ -29,35 +29,21 @@ export default {
     module: { type: String, required: true },
     title: { type: String, required: false, default: '' },
     headers: { type: Array, required: false, default: () => [] },
-    get: { type: String, required: false },
+    getter: { type: String, required: false },
     add: { type: String, required: false },
     update: { type: String, required: false },
-    delete: { type: String, required: false }
+    delete: { type: String, required: false },
+    deleteByField: { type: String, required: false, default: 'id' }
   },
   computed: {
-    _get: function () {
-      return this.capitalizedFromModule(this.getter, 'get')
-    },
-    _addAction: function () {
-      return this.capitalizedFromModule(this.add, 'add')
-    },
-    _updateAction: function () {
-      return this.capitalizedFromModule(this.update, 'update')
-    },
-    _deleteAction: function () {
-      return this.capitalizedFromModule(this.delete, 'delete')
-    },
     items: function () {
-      return this.$store.getters[ this._get ]
+      let data = this.$store.getters[ this.actionName(this.getter, 'get') ]
+      return typeof data === 'object' ? Object.values(data) : data
     }
   },
   methods: {
-    capitalizedFromModule (value, action) {
-      if (value) {
-        return value
-      } else {
-        return `${this.module}/${action}`
-      }
+    actionName (value, action) {
+      return value || `${this.module}/${action}`
     },
     async dispatchModuleAction (action, data) {
       try {
@@ -67,13 +53,13 @@ export default {
       }
     },
     async addItem (item) {
-      await this.dispatchModuleAction(this._addAction, item)
+      await this.dispatchModuleAction(this.actionName(this.add, 'add'), item)
     },
     async updateItem (item) {
-      await this.dispatchModuleAction(this._updateAction, item)
+      await this.dispatchModuleAction(this.actionName(this.update, 'update'), item)
     },
     async deleteItem (item) {
-      await this.dispatchModuleAction(this._deleteAction, item)
+      await this.dispatchModuleAction(this.actionName(this.delete, 'delete'), item[this.deleteByField])
     }
   }
 }
