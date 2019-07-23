@@ -5,18 +5,14 @@ Vuertify Easy Crud extends [vuetify's](https://vuetifyjs.com) `v-data-table` com
 What component to use?
 - just vuetify: `vec-table`
 - vuetify + vuex: `vex-table`
-- vuetify + vuex + firebase: `vef-table` (Not implemented yet)
+- vuetify + vuex + firestore: `vef-table`
 
 
 # Requirements
 
-The following packages are included as peer dependencies:
-- vuetify
-- vuex-easy-firebase
-
-This means that you must install them yourself. NPM will warn you if they are not present in your project.
-
 ### Vuetify
+Vuetify is included as peer dependency. This means that you must install them yourself. NPM will warn you if they are not present in your project.
+
 For instructions on how to install Vuetify please visit [this quick start guide](https://vuetifyjs.com/en/getting-started/quick-start).
 
 If you are using Vuetify's a la carte system you need to import the following components:
@@ -24,6 +20,13 @@ If you are using Vuetify's a la carte system you need to import the following co
 - VCard, VCardTitle, VCardText, VCardActions
 - VDialog, VTextField, VBtn, VIcon
 - VSpacer
+
+### Vuex
+If you want to use `vex-table` you need to install `vuex`, visit this [link](https://vuex.vuejs.org/installation.html) for instructions.
+
+### Vuex Easy Firestore
+If you want to use `vef-table` you need to install `vuex-easy-firestore` and `firebase`, visit this [link](https://mesqueeb.github.io/vuex-easy-firestore/setup.html#installation) for instructions.
+
 
 # Installation
 Install it with `NPM` by running: 
@@ -130,9 +133,9 @@ Each CRUD operation performed on the data fires an event. This component does no
 
 | Event | Description |
 | --- | --- |
-| `add-item` | Emitted when a create-form is submitted. Receives `item` object. |
-| `update-item` | Emitted when an update-form is saved. Receives `item` object. |
-| `delete-item` | Emitted when an item is deleted. Receives `item` object. |
+| `add-item` | Emitted when a create-form is submitted. Payload: `item` object. |
+| `update-item` | Emitted when an update-form is saved. Payload: `item` object. |
+| `delete-item` | Emitted when an item is deleted. Payload: `item` object. |
 
 ## Vuetify Easy CRUD Fragment (vec-fragment)
 The `vec-fragment` is an auxiliary component used to customize the `list-view` slot component. The `list-view` component needs to return multiple `<td>` elements at the root level. This functionality is currently planned to be implemented on [Vue 3.0](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf). Until then, this component uses [vue-fragments](https://www.npmjs.com/package/vue-fragments) to achieve the same result.
@@ -157,7 +160,7 @@ export default {
 
 ## "Vuetify Easy CRUD Table" Easy Vuex (vex-table)
 
-`vex-table` component extends the functionality from `vec-table` by adding integration with Vuex store.
+`vex-table` component extends the functionality of `vec-table` by adding integration with Vuex store.
 The component uses a getter to obtain initial data and dispatches add/update/delete actions for CRUD operations.
 Vuex setup and implementation need to be implemented separately.
 
@@ -188,16 +191,65 @@ Vuex setup and implementation need to be implemented separately.
 | `module` | (required) Vuex module name. |
 | `title` | (optional) Display name for the table. |
 | `headers` | (optional) Array of objects representing the table headers. Shared options with `vec-table`. |
-| `get` | (optional) Name of the getter to obtain initial data. Default: `<module>/get` |
+| `getter` | (optional) Name of the getter to obtain initial data. Default: `<module>/get` |
 | `add` | (optional) Name of the action to add an item. Default: `<module>/add` |
 | `update` | (optional) Name of the action to update an item. Default: `<module>/update` |
 | `delete` | (optional) Name of the action to delete an item. Default: `<module>/delete` |
+| `deleteByField` | (optional) Name of field by which items are identified on a delete action. Default: `id` |
 
 ### Slots
-See `vec-table`slots.
+See `vec-table` slots.
 
 ### Events
-This component uses no events.
+As stated, this component dispatches events to the vuex store. Again, it's up to the user to provide the proper vuex store actions, mutations, etc.
+
+| Event type | Default event name | Description |
+| --- | --- | --- |
+| `get` | `get` | (getter) Used to obtain initial data. Payload: none. |
+| `add` | `add` | Dispached when an item is added. Payload: `item` object. |
+| `update` | `update` | Dispached when an item is updated. Payload: `item` object. |
+| `delete` | `delete` | Dispached when an item is deleted. Payload: Unique identifier for the item: `item[deleteByField]`. |
+
+## "Vuetify Easy CRUD Table" Easy Firestore (vef-table)
+
+`vef-table` component extends the functionality of `vec-table` by adding integration with Google Firestore.
+The component uses getters and actions already established by `vuex-easy-firestore` to automatically handle CRUD operations.
+Both Vuex and Vuex Easy Firestore setup and implementation need to be implemented separately.
+
+### Usage
+```html
+    <vef-table module="moduleName" title="Table title" :headers="['firstname', 'lastname']">
+      <template v-slot:create-form="props">
+        <create-form></create-form>
+      </template>
+      <template v-slot:update-form="props">
+        <update-form :item="props.item"></update-form>
+      </template>
+    </vef-table>
+```
+
+### Properties
+```vex-table``` accepts the following properties: 
+
+| Prop | Description |
+| --- | --- |
+| `module` | (required) Firestore module name. |
+| `title` | (optional) Display name for the table. |
+| `headers` | (optional) Array of objects representing the table headers. Shared options with `vec-table`. |
+
+### Slots
+See `vec-table` slots.
+
+### Events
+All events are handled automatically for this component. No extra setup is required.
+
+See `vex-table` events. Additional events:
+
+| Event type | Default event name | Description |
+| --- | --- | --- |
+| `open` | `openDBChannel` | Dispatched to open a two way sync with a collection. Automatically fired on created(). |
+| `close` | `closeDBChannel` | Dispatched to close a two way sync with a collection. Automatically fired on destroyed(). |
+
 
 # Mixins
 
