@@ -1,7 +1,12 @@
 <template>
   <v-data-table :headers="headers" :items="items" :search="search">
     <template v-slot:items="props">
-      <slot name="row" :item="props.item"></slot>
+      <slot name="row" :item="props.item">
+        <td
+          v-for="(value, index) in headers.filter(h => h.value !== 'actions')"
+          :key="index"
+        >{{ props.item[value.value] }}</td>
+      </slot>
       <td>
         <crud-action
           v-for="(action, index) in actions"
