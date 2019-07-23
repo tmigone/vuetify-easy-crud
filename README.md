@@ -8,6 +8,11 @@ What component to use?
 - vuetify + vuex + firestore: `vef-table`
 
 
+# Example
+
+For a complete working example with code, check out [vuetify-easy-crud-example](https://github.com/tomasmigone/vuetify-easy-crud-example).
+
+
 # Requirements
 
 ### Vuetify
@@ -262,9 +267,3 @@ The mixin provides the following functionality:
 - `exit` method. Closes the form without saving.
 - `createAndExit` method. Closes the form after saving a new item (based of `editableItem`).
 - `updateAndExit` method. Closes the form after updating an existing item (based of `editableItem`).
-
-
-# Example
-
-For a complete working example check out [vuetify-easy-crud-example](https://github.com/tomasmigone/vuetify-easy-crud-example).
-
