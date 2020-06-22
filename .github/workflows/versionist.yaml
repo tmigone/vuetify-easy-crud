@@ -8,13 +8,12 @@ jobs:
   balena-versionist:
     runs-on: ubuntu-latest
     steps: 
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: tmigone/balena-versionist-action@master
       with:
         github_email: 'tomasmigone@gmail.com'
         github_username: 'Tomás Migone'
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/checkout@v1
     - uses: JS-DevTools/npm-publish@v1
       with:
         token: ${{ secrets.NPM_TOKEN }}
